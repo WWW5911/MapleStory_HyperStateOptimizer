@@ -1,3 +1,3 @@
 # MapleStory_HyperStateOptimizer
 
-https://maplestoryhyper.astriaworks.moe/
+https://msh.astriaworks.moe/
