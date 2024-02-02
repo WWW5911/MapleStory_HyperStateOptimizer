@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>最佳極限屬性計算機-Astria</title>
+    <style>
+        #output {
+            white-space: pre-line;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('background.jpg');
+            /* 背景圖片的路徑 */
+            background-size: cover;
+            /* 使背景圖片覆蓋整個畫面 */
+            background-position: center;
+            /* 將背景圖片置中 */
+        }
+
+        .container {
+            display: flex;
+            width: 80%;
+            background-image: linear-gradient(to top, #ffecd2d6 0%, #fcb69fd6 100%);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .left {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .right {
+            flex: 1;
+            display: flex;
+            padding-left: 10px;
+            flex-direction: column; /* 將右側佈局改為垂直佈局 */
+            justify-content: center; /* 垂直置中 */
+            align-items: left; /* 讓子元素水平左側對齊 */
+        }
+
+        textarea {
+            width: 100%;
+            height: 80vh;
+            resize: none;
+            font-size: 16px;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .output {
+            text-align: left;
+            font-size: 24px;
+        }
+
+        .white-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            /* 白色遮罩層，透明度為0.8 */
+        }
+
+        .title {
+            text-align: center;
+            /* 將標題置中 */
+            padding: 20px;
+            /* 添加底部間距 */
+            border: 1px solid #ffecd2d6;
+        }
+
+        .title h3 {
+            margin: 0;
+            /* 清除標題的預設邊距 */
+        }
+
+        .footer {
+            text-align: left;
+            background-color: #f8f9fad0;
+            /* 底部背景顏色 */
+            padding-top: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            color: #b5786797;
+        }
+
+        .closeBtn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+        .short-input {
+            width: 100px; /* 設置您想要的輸入框寬度，這裡設置為 100px */
+        }
+        .container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.left, .right {
+    width: 45%;
+}
+
+.left {
+    flex: 1;
+    padding-right: 20px;
+    margin-right: 20px;
+    position: relative;
+}
+
+.right {
+    padding-left: 20px;
+    border-left: 1px solid #ccc;
+    position: relative;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: inline-block;
+    width: 200px;
+}
+
+input {
+    width: calc(100% - 120px);
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#output {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+}
+#calculateBtn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #b5786797;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+#calculateBtn:hover {
+    background-color: #7d574c97;
+}
+.output-heading {
+    align-self: flex-start; /* 讓輸出字樣固定在最上方 */
+}
+#output {
+    margin-top: auto; /* 讓它在垂直方向上自動填充空間，將其置於中間 */
+    margin-bottom: auto; /* 讓它在垂直方向上自動填充空間，將其置於中間 */
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h3>補</h3><br>
+            <h3>償</h3><br>
+            <h3>刀</h3><br>
+            <h3>計</h3><br>
+            <h3>算</h3><br>
+            <h3>機</h3><br>
+        </div>
+
+
+        <div class="container">
+            <div class="left">
+                <h2>輸入</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="input1">主屬性：</label>
+                        <input type="text" id="mainV">
+                    </div>
+                    <div class="input-group">
+                        <label for="input2">副屬性：</label>
+                        <input type="text" id="subV">
+                    </div>
+                    <div class="input-group">
+                        <label for="input3">攻擊力（加成前）：</label>
+                        <input type="text" id="att">
+                    </div>
+                    <div class="input-group">
+                        <label for="input4">攻擊力％：</label>
+                        <input type="text" id="att_p">
+                    </div>
+                    <div class="input-group">
+                        <label for="input5">總傷害：</label>
+                        <input type="text" id="tot_a">
+                    </div>
+                    <div class="input-group">
+                        <label for="input6">Boss傷害：</label>
+                        <input type="text" id="boss_a">
+                    </div>
+                    <div class="input-group">
+                        <label for="input7">無視防禦（0 極限屬性）：</label>
+                        <input type="text" id="base_ig">
+                    </div>
+                    <div class="input-group">
+                        <label for="input8">爆擊傷害：</label>
+                        <input type="text" id="ctri_a">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="input9">目標防禦％：</label>
+                        <input type="text" id="defense">
+                    </div>
+                    <div class="input-group">
+                        <label for="input10">剩餘點數：</label>
+                        <input type="text" id="points">
+                    </div>
+                    <!-- 其他輸入框 -->
+                </form>
+                <button id="calculateBtn", onclick="example()">輸入範例</button>
+            </div>
+            <div class="right">
+                <div class="output-heading">
+                    <h2>輸出</h2>
+                </div>
+                <div id="output">
+
+
+                </div>
+                
+                <button id="calculateBtn", onclick="calculate()">計算</button> <!-- 新增計算按鈕 -->
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <span id="closeFooterBtn" class="closeBtn">×</span>
+        &nbsp;&nbsp;&nbsp;本網站為靜態網站，不回傳任何資訊到後端，網站作者：Astria 「https://github.com/WWW5911」、「https://www.astriaworks.moe/」；contact@astriaworks.moe。
+        <br>
+        &nbsp;&nbsp;&nbsp;背景來源：URL：http://loo.sakura.ne.jp/index.html；サイト名：空彩；管理人：ツジキ
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('closeFooterBtn').addEventListener('click', function () {
+            document.querySelector('.footer').style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
