@@ -37,7 +37,7 @@ class CharStatusDA {
 
     base() {
         this.update_HP();
-        return ( Math.floor( (this.level * 90 + 545) / 3.5 ) + 0.8 * Math.floor( (this.HP - (this.level * 90 + 545) )/3.5 ) ) * this.weapon * (this.att * (1 + this.att_p) ) * 0.01
+        return ( Math.floor( (this.level * 90 + 545) / 3.5 ) + 0.8 * Math.floor( (this.HP - (this.level * 90 + 545) )/3.5 ) + this.STR ) * this.weapon * (this.att * (1 + this.att_p) ) * 0.01
     }
     defense_c() {
         var ret = 1 - this.defense * ( 1 - this.ignore) // (1-0.86) * (1-ignore)
