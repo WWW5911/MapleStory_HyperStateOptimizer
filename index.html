@@ -153,7 +153,7 @@ input {
     padding: 10px;
     border-radius: 4px;
 }
-#calculateBtn {
+.calculateBtn {
     position: absolute;
     bottom: 0;
     right: 0;
@@ -167,7 +167,7 @@ input {
 }
 
 
-#calculateBtn:hover {
+.calculateBtn:hover {
     background-color: #7d574c97;
 }
 .output-heading {
@@ -177,11 +177,26 @@ input {
     margin-top: auto; /* 讓它在垂直方向上自動填充空間，將其置於中間 */
     margin-bottom: auto; /* 讓它在垂直方向上自動填充空間，將其置於中間 */
 }
+.switchBtn {
+    background-color: #b5786797;
+    color: white;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+
+#switchBtn:hover {
+    background-color: #7d574c97;
+}
 
     </style>
 </head>
 
 <body>
+    
     <div class="container">
         <div class="title">
             <h3>最</h3><br>
@@ -193,6 +208,14 @@ input {
             <h3>計</h3><br>
             <h3>算</h3><br>
             <h3>機</h3><br>
+            <br>
+            <button class="switchBtn", onclick="page_normal()">一　般</button>
+            <br>
+            <button class="switchBtn", onclick="page_DA()">惡　復</button>
+            <br>
+            <button class="switchBtn", onclick="page_DS()">雙副屬</button>
+            <br>
+            <button class="switchBtn", onclick="page_Xenon()">傑　諾</button>
         </div>
 
 
@@ -200,50 +223,17 @@ input {
             <div class="left">
                 <h2>輸入</h2>
                 <form>
-                    <div class="input-group">
-                        <label for="input1">主屬性：</label>
-                        <input type="text" id="mainV">
-                    </div>
-                    <div class="input-group">
-                        <label for="input2">副屬性：</label>
-                        <input type="text" id="subV">
-                    </div>
-                    <div class="input-group">
-                        <label for="input3">攻擊力（加成前）：</label>
-                        <input type="text" id="att">
-                    </div>
-                    <!-- <div class="input-group">
-                        <label for="input4">攻擊力％：</label>
-                        <input type="text" id="att_p">
-                    </div> -->
-                    <div class="input-group">
-                        <label for="input5">總傷害：</label>
-                        <input type="text" id="tot_a">
-                    </div>
-                    <div class="input-group">
-                        <label for="input6">Boss傷害：</label>
-                        <input type="text" id="boss_a">
-                    </div>
-                    <div class="input-group">
-                        <label for="input7">無視防禦（0 極限屬性）：</label>
-                        <input type="text" id="base_ig">
-                    </div>
-                    <div class="input-group">
-                        <label for="input8">爆擊傷害：</label>
-                        <input type="text" id="ctri_a">
-                    </div>
-
-                    <div class="input-group">
-                        <label for="input9">目標防禦％：</label>
-                        <input type="text" id="defense">
-                    </div>
-                    <div class="input-group">
-                        <label for="input10">剩餘點數：</label>
-                        <input type="text" id="points">
-                    </div>
-                    <!-- 其他輸入框 -->
-                </form>
-                <button id="calculateBtn", onclick="example()">輸入範例</button>
+                    <div class="input-group"> <label for="input1">主屬性：</label> <input type="text" id="mainV"> </div>
+                    <div class="input-group"> <label for="input2">副屬性：</label> <input type="text" id="subV"> </div>
+                    <div class="input-group"> <label for="input3">攻擊力（加成前）：</label> <input type="text" id="att"> </div>
+                    <!-- <div class="input-group"> <label for="input4">攻擊力％：</label> <input type="text" id="att_p"> </div> -->
+                    <div class="input-group"> <label for="input5">總傷害：</label> <input type="text" id="tot_a"> </div>
+                    <div class="input-group"> <label for="input6">Boss傷害：</label> <input type="text" id="boss_a"> </div>
+                    <div class="input-group"> <label for="input7">無視防禦（0 極限屬性）：</label> <input type="text" id="base_ig"> </div>
+                    <div class="input-group"> <label for="input8">爆擊傷害：</label> <input type="text" id="ctri_a"> </div>
+                    <div class="input-group"> <label for="input9">目標防禦％：</label> <input type="text" id="defense"> </div>
+                    <div class="input-group"> <label for="input10">剩餘點數：</label> <input type="text" id="points"> </div> <!-- 其他輸入框 -->
+                </form> <button class="calculateBtn" , onclick="example()">輸入範例</button>
             </div>
             <div class="right">
                 <div class="output-heading">
@@ -254,7 +244,7 @@ input {
 
                 </div>
                 
-                <button id="calculateBtn", onclick="calculate()">計算</button> <!-- 新增計算按鈕 -->
+                <button class="calculateBtn", onclick="calculate()">計算</button> <!-- 新增計算按鈕 -->
             </div>
         </div>
     </div>
@@ -266,6 +256,10 @@ input {
         &nbsp;&nbsp;&nbsp;背景來源：URL：http://loo.sakura.ne.jp/index.html；サイト名：空彩；管理人：ツジキ
     </div>
     <script src="js/main.js"></script>
+    <script src="js/DA.js"></script>
+    <script src="js/DS.js"></script>
+    <script src="js/Xenon.js"></script>
+    <script src="js/page_switch.js"></script>
     <script>
         document.getElementById('closeFooterBtn').addEventListener('click', function () {
             document.querySelector('.footer').style.display = 'none';
