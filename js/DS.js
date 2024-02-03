@@ -33,7 +33,7 @@ class CharStatusDS {
     }
     defense_c() {
         var ret = 1 - this.defense * ( 1 - this.ignore) // (1-0.86) * (1-ignore)
-        if (ret < 0) return 0
+        if (ret < 0) return 1e-20;
         return ret
     }
     realAtk() {
@@ -145,8 +145,44 @@ function dfsDS(charStatus, points){
     }
     
 }
+
+function checkIgnore(charStatus, points){
+    var tmp = charStatus.clone();
+    var tmp_point = points;
+    var breakFlag = true;
+    if (tmp.realAtk() < 1) {
+        for (var i = 0; i < 16; ++i) {
+            point_next = pointNeed(tmp.p_ignore + 1);
+            if (tmp_point >= point_next) {
+                tmp_point -= point_next;
+                var tmp = tmp.clone();
+                tmp.ignore = tmp.base_ig;
+                tmp.p_ignore += 1;
+                tmp.add_ignore(tmp.p_ignore * 0.03);
+                if (tmp.realAtk() >= 1) {
+                    charStatus = tmp.clone();
+                    points = tmp_point;
+                    breakFlag = true;
+                    break;
+                }else{
+                    breakFlag = false;
+                }
+            }
+
+        }
+    }
+
+    return [charStatus, tmp_point, breakFlag];
+}
+
+
 function optim_GreddyDS(charStatus, points){
     last_point = -1
+    ig = checkIgnore(charStatus, points);
+    charStatus = ig[0];
+    points = ig[1];
+    breakFlag = ig[2];
+
 
     while(last_point != points && points > 0){
         based_atk = charStatus.realAtk()
@@ -321,13 +357,13 @@ function calculateDS(){
     console.log(mainV, subV, att, att_p, tot_a, boss_a, base_ig, ctri_a, defense)
     if(isNaN(mainV+ subV + subV2 + att+ att_p+ tot_a+ boss_a+ base_ig+ ctri_a + defense) || att <= 0 || mainV <= 0 || subV<= 0 || subV2 <= 0 ){
         document.getElementById("output").innerHTML = "輸入有錯！請檢查一下紅色的項目><";
-        if(isNaN(mainV) || mainV == 0) 
+        if(isNaN(mainV) || mainV <= 0) 
             document.querySelector('label[for="input1"]').style.color = 'red';
-        if(isNaN(subV) || subV == 0) 
+        if(isNaN(subV) || subV <= 0) 
             document.querySelector('label[for="input2"]').style.color = 'red';
-        if(isNaN(subV2) || subV2 == 0) 
+        if(isNaN(subV2) || subV2 <= 0) 
             document.querySelector('label[for="input15"]').style.color = 'red';
-        if(isNaN(att) || att == 0) 
+        if(isNaN(att) || att <= 0) 
             document.querySelector('label[for="input3"]').style.color = 'red';
         if(isNaN(att_p)) 
             document.querySelector('label[for="input4"]').style.color = 'red';
@@ -348,12 +384,19 @@ function calculateDS(){
         document.getElementById("output").innerHTML = "計算中>< <br> 目前推演至：" ;
         my = new CharStatusDS( mainV, subV, subV2, 1, att, att_p, boss_a+tot_a, defense, base_ig, ctri_a )
         best_status = optim_GreddyDS(my, points)
-        document.getElementById("output").innerHTML  = '主屬性　應升至：' + best_status[0].p_main + " 等<br><br>副屬性　應升至：" + best_status[0].p_sub
-        document.getElementById("output").innerHTML += ' 等<br><br>副屬性2 應升至：' + best_status[0].p_sub2;
-        document.getElementById("output").innerHTML += ' 等<br><br>爆擊傷害應升至：' + best_status[0].p_ctri + " 等<br><br>無視防禦應升至：" + best_status[0].p_ignore
-        document.getElementById("output").innerHTML += ' 等<br><br>Boss傷害應升至：' + best_status[0].p_Bharm + " 等<br><br>傷害　　應升至：" + best_status[0].p_harm
-        document.getElementById("output").innerHTML += ' 等<br><br>攻擊力　應升至：' + best_status[0].p_atk + " 等<br><br><br>剩餘點數：" + best_status[1]
-        document.getElementById("output").innerHTML += "<br>提升幅度：" +  Math.round( best_status[0].realAtk() / my.realAtk() * 1000 ) / 1000
+        if (breakFlag) {
+            document.getElementById("output").innerHTML = '主屬性　應升至：' + best_status[0].p_main + " 等<br><br>副屬性　應升至：" + best_status[0].p_sub
+            document.getElementById("output").innerHTML += ' 等<br><br>副屬性2 應升至：' + best_status[0].p_sub2;
+            document.getElementById("output").innerHTML += ' 等<br><br>爆擊傷害應升至：' + best_status[0].p_ctri + " 等<br><br>無視防禦應升至：" + best_status[0].p_ignore
+            document.getElementById("output").innerHTML += ' 等<br><br>Boss傷害應升至：' + best_status[0].p_Bharm + " 等<br><br>傷害　　應升至：" + best_status[0].p_harm
+            document.getElementById("output").innerHTML += ' 等<br><br>攻擊力　應升至：' + best_status[0].p_atk + " 等<br><br><br>剩餘點數：" + best_status[1]
+            document.getElementById("output").innerHTML += "<br>提升幅度：";
+            upp = Math.round(best_status[0].realAtk() / my.realAtk() * 1000) / 1000;
+            if (upp > 10) document.getElementById("output").innerHTML += "從不能破防變破防！<br>超多><";
+            else document.getElementById("output").innerHTML += upp;
+        } else {
+            document.getElementById("output").innerHTML = "不能破防 :<"
+        }
     }
 }
 
