@@ -216,6 +216,8 @@ input {
             <button class="switchBtn", onclick="page_DS()">雙副屬</button>
             <br>
             <button class="switchBtn", onclick="page_Xenon()">傑　諾</button>
+            <br>
+            <button class="switchBtn", onclick="page_KA()">神　娜</button>
         </div>
 
 
@@ -232,7 +234,8 @@ input {
                     <div class="input-group"> <label for="input7">無視防禦（0 極限屬性）：</label> <input type="text" id="base_ig"> </div>
                     <div class="input-group"> <label for="input8">爆擊傷害：</label> <input type="text" id="ctri_a"> </div>
                     <div class="input-group"> <label for="input9">目標防禦％：</label> <input type="text" id="defense"> </div>
-                    <div class="input-group"> <label for="input10">剩餘點數：</label> <input type="text" id="points"> </div> <!-- 其他輸入框 -->
+                    <div class="input-group"> <label for="input10">剩餘點數：</label> <input type="text" id="points"> </div>
+                    <!-- 其他輸入框 -->
                 </form> <button class="calculateBtn" , onclick="example()">輸入範例</button>
             </div>
             <div class="right">
@@ -244,7 +247,7 @@ input {
 
                 </div>
                 
-                <button class="calculateBtn", onclick="calculate()">計算</button> <!-- 新增計算按鈕 -->
+                <button class="calculateBtn", onclick="calculateKA()">計算</button> <!-- 新增計算按鈕 -->
             </div>
         </div>
     </div>
@@ -258,6 +261,7 @@ input {
     <script src="js/main.js"></script>
     <script src="js/DA.js"></script>
     <script src="js/DS.js"></script>
+    <script src="js/KA.js"></script>
     <script src="js/Xenon.js"></script>
     <script src="js/page_switch.js"></script>
     <script>
