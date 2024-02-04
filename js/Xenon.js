@@ -386,7 +386,7 @@ function calculateXenon(){
             document.getElementById("output").innerHTML = '力量　　應升至：' + best_status[0].p_main + " 等<br><br>敏捷　　應升至：" + best_status[0].p_sub
             document.getElementById("output").innerHTML += ' 等<br><br>幸運　　應升至：' + best_status[0].p_sub2;
             document.getElementById("output").innerHTML += ' 等<br><br>爆擊傷害應升至：' + best_status[0].p_ctri + " 等<br><br>無視防禦應升至：" + best_status[0].p_ignore
-            document.getElementById("output").innerHTML += ' 等<br><br>Boss傷害應升至：' + best_status[0].p_Bharm + " 等<br><br>傷害　　應升至：" + best_status[0].p_harm
+            document.getElementById("output").innerHTML += " 等<br><br>傷害　　應升至：" + best_status[0].p_harm + ' 等<br><br>Boss傷害應升至：' + best_status[0].p_Bharm 
             document.getElementById("output").innerHTML += ' 等<br><br>攻擊力　應升至：' + best_status[0].p_atk + " 等<br><br><br>剩餘點數：" + best_status[1]
             document.getElementById("output").innerHTML += "<br>提升幅度：";
             upp = Math.round(best_status[0].realAtk() / my.realAtk() * 1000) / 1000;
