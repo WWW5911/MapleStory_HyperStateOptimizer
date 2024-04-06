@@ -302,6 +302,60 @@ function optim_GreddyDS(charStatus, points){
         points -= point_used
 
     }
+
+    // second step
+    if(charStatus.p_main > 0){
+        points += pointNeed(charStatus.p_main);
+        charStatus.p_main -= 1;
+        charStatus.mainV -= 30;
+    }
+    if(charStatus.p_sub > 0){
+        points += pointNeed(charStatus.p_sub);
+        charStatus.p_sub -= 1;
+        charStatus.subV -= 30;
+    }
+    if(charStatus.p_sub2 > 0){
+        points += pointNeed(charStatus.p_sub2);
+        charStatus.p_sub2 -= 1;
+        charStatus.subV2 -= 30;
+    }
+    if(charStatus.p_atk > 0){
+        points += pointNeed(charStatus.p_atk);
+        charStatus.p_atk -= 1;
+        charStatus.att -= 3;
+    }
+    if(charStatus.p_Bharm > 0){
+        points += pointNeed(charStatus.p_Bharm);
+        if(charStatus.p_Bharm <= 5)
+            charStatus.boss_a -= 0.03
+        else
+            charStatus.boss_a -= 0.04
+        charStatus.p_Bharm -= 1;
+    }
+    if(charStatus.p_ctri > 0){
+        points += pointNeed(charStatus.p_ctri);
+        charStatus.p_ctri -= 1;
+        charStatus.ctri_a -= 0.01;
+    }
+    if(charStatus.p_ignore > 0){
+        points += pointNeed(charStatus.p_ignore);
+        charStatus.p_ignore -= 1;
+        tmp.add_ignore( tmp.p_ignore * 0.03 )
+    }
+    if(charStatus.p_harm > 0){
+        points += pointNeed(charStatus.p_harm);
+        charStatus.p_harm -= 1;
+        charStatus.boss_a -= 0.03
+    }
+
+    set = new Set()
+    dfs(charStatus, points)
+    max_v = 0
+    point_used = points - max_left
+    charStatus = max_status.clone()
+    points -= point_used
+    console.log(charStatus.get_points())
+
     return [charStatus, points]
 }
 
