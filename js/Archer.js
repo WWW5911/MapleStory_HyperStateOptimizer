@@ -29,7 +29,7 @@ class CharStatusAR {
     }
 
     base() {
-        return (4 * this.mainV + this.subV + this.ctri_p) * this.weapon * (this.att * (1 + this.att_p) ) * 0.01
+        return (4 * this.mainV + this.subV) * this.weapon * (this.att * (1 + this.att_p) ) * 0.01
     }
     defense_c() {
         var ret = 1 - this.defense * ( 1 - this.ignore) // (1-0.86) * (1-ignore)
