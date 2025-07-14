@@ -278,6 +278,7 @@ function optim_Greddy(charStatus, points){
             tmp.ignore = tmp.base_ig
             tmp.p_ignore += 1
             tmp.add_ignore( tmp.p_ignore * 0.03 )
+            console.log(tmp.p_ignore);
             tmp_rAtk = (tmp.realAtk() - based_atk) / point_next;
             if(tmp_rAtk > max_up){
                 max_up = tmp_rAtk;
@@ -366,7 +367,7 @@ function optim_Greddy(charStatus, points){
     if(charStatus.p_ignore > 0){
         points += pointNeed(charStatus.p_ignore);
         charStatus.p_ignore -= 1;
-        tmp.add_ignore( tmp.p_ignore * 0.03 )
+        charStatus.add_ignore( charStatus.p_ignore * 0.03 )
     }
     if(charStatus.p_harm > 0){
         points += pointNeed(charStatus.p_harm);

@@ -340,7 +340,7 @@ function optim_GreddyDS(charStatus, points){
     if(charStatus.p_ignore > 0){
         points += pointNeed(charStatus.p_ignore);
         charStatus.p_ignore -= 1;
-        tmp.add_ignore( tmp.p_ignore * 0.03 )
+        charStatus.add_ignore( charStatus.p_ignore * 0.03 )
     }
     if(charStatus.p_harm > 0){
         points += pointNeed(charStatus.p_harm);
